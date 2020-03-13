@@ -1,0 +1,297 @@
+﻿<UserControl x:Class="ServerMaster.Forms.Pages.Others.RefTeleportPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:EnumsGenel="clr-namespace:ServerMaster.Definitions.Enums.Genel"
+             xmlns:EnumsRefTeleLink="clr-namespace:ServerMaster.Definitions.Enums.RefTeleLink"
+             xmlns:Framework="clr-namespace:ServerMaster.Framework"
+             mc:Ignorable="d">
+    <Grid Background="White">
+        <!-- _RefTeleport List -->
+        <Grid HorizontalAlignment="Left" Width="340" Margin="0,3,0,0">
+            <GroupBox Margin="0,0,0,5" Header="List">
+                <Grid>
+                    <ListView x:Name="RefTeleport" Margin="0,5,0,35" SelectionMode="Single" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="True" SelectionChanged="RefTeleport_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Service}" Value="1" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#33008000" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Service}" Value="0" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#33FF0000" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Click="RefTeleport_MenuItem_AddClick" Header="Add" Tag="RefTeleport_Teleport"></MenuItem>
+                                            <MenuItem Click="RefTeleport_MenuItem_RemoveClick" Header="Remove" Tag="RefTeleport_Teleport"></MenuItem>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <Grid>
+                                        <TextBlock Text="{Binding CodeName128}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                        <Grid VerticalAlignment="Bottom" Margin="0,30,0,5">
+                                            <TextBlock TextWrapping="WrapWithOverflow" Margin="0,0,30,0" Text="{Binding ZoneName128_Media}" HorizontalAlignment="Left" />
+                                            <TextBlock Text="{Binding ID}" HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid Margin="0,0,0,5" Height="35" VerticalAlignment="Bottom">
+                        <TextBox Name="RefTeleport_Search" Height="25" TextWrapping="WrapWithOverflow" TextChanged="RefTeleport_Search_TextChanged" />
+                    </Grid>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <!-- /RefTeleport List -->
+
+        <!-- _RefTeleport -->
+        <Button Margin="350,10,292,0" Content="Save" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" Width="250" Click="RefTeleport_TeleportButton_Click" />
+        <ScrollViewer Margin="350,40,292,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+            <GroupBox Name="RefTeleport_Teleport" Header="_RefTeleport">
+                <VirtualizingStackPanel>
+                    <UniformGrid Rows="2">
+                        <Label Content="Service:" VerticalAlignment="Top" />
+                        <ComboBox  VerticalAlignment="Top" SelectedItem="{Binding Service}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsGenel:Service}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ID:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding ID}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CodeName128:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding CodeName128}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="AssocRefObjCodeName128:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding AssocRefObjCodeName128}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="AssocRefObjID:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding AssocRefObjID}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ZoneName128:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding ZoneName128}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="GenRegionID:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding GenRegionID}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="GenPos_X:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding GenPos_X}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="GenPos_Y:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding GenPos_Y}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="GenPos_Z:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding GenPos_Z}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="GenAreaRadius:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding GenAreaRadius}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanBeResurrectPos:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding CanBeResurrectPos}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanGotoResurrectPos:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding CanGotoResurrectPos}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="GenWorldID:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding GenWorldID}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="BindInteractionMask:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding BindInteractionMask}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="FixedService:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding FixedService}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="3">
+                        <Label Content="Charname:" VerticalAlignment="Top" />
+                        <TextBox Name="RefTeleport_Charname" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                        <Button Margin="0,1,0,0" Content="Get Position of Character" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" Width="250" Click="RefTeleport_GetPositionButton_Click" />
+                    </UniformGrid>
+                </VirtualizingStackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!-- /_RefTeleport Edit -->
+
+        <!-- _RefTeleLink List -->
+        <Grid Margin="623,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="750" Width="340">
+            <GroupBox Margin="0" Header="List">
+                <Grid>
+                    <ListView x:Name="RefTeleLink" Margin="0,5,0,5" SelectionMode="Single" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="True" SelectionChanged="RefTeleLink_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Service}" Value="1" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#33008000" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Service}" Value="0" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#33FF0000" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Click="RefTeleport_MenuItem_AddClick" Header="Add" Tag="RefTeleport_TeleLink"></MenuItem>
+                                            <MenuItem Click="RefTeleport_MenuItem_RemoveClick" Header="Remove" Tag="RefTeleport_TeleLink"></MenuItem>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <Grid>
+                                        <TextBlock Text="{Binding GetOwnerTeleportName}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                        <Grid VerticalAlignment="Bottom" Margin="0,30,0,5">
+                                            <TextBlock TextWrapping="WrapWithOverflow" Margin="0,0,30,0" Text="{Binding GetTargetTeleportName}" HorizontalAlignment="Left" />
+                                            <TextBlock Text="{Binding ID}" HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Click="RefTeleport_MenuItem_AddClick" Header="Add" Tag="RefTeleport_TeleLink"></MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <!-- /_RefTeleLink List -->
+
+        <!-- _RefTeleport -->
+        <Button Margin="970,10,292,0" Content="Save" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" Click="RefTeleLink_TeleportButton_Click" Width="250" />
+        <ScrollViewer Margin="970,40,292,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+            <GroupBox Name="RefTeleport_TeleportLink" Header="_RefTeleLink">
+                <VirtualizingStackPanel>
+                    <UniformGrid Rows="2">
+                        <Label Content="Service:" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Service}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsGenel:Service}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ID:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding ID}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="OwnerTeleport:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding OwnerTeleport}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="TargetTeleport:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding TargetTeleport}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Fee:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Fee}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="RestrictBindMethod:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding RestrictBindMethod}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="RunTimeTeleportMethod:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding RunTimeTeleportMethod}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CheckResult:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding CheckResult}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Restrict1:" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Restrict1}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefTeleLink:RestrictType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data1_1:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data1_1}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data1_2:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data1_2}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Restrict2:" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Restrict2}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefTeleLink:RestrictType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data2_1:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data2_1}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data2_2:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data2_2}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Restrict3:" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Restrict3}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefTeleLink:RestrictType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data3_1:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data3_1}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data3_2:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data3_2}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Restrict4:" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Restrict4}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefTeleLink:RestrictType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data4_1:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data4_1}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data4_2:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data4_2}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Restrict5:" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Restrict5}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefTeleLink:RestrictType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data5_1:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data5_1}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Data5_2:" VerticalAlignment="Top" />
+                        <TextBox  VerticalAlignment="Top" Text="{Binding Data5_2}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" TextWrapping="Wrap" />
+                    </UniformGrid>
+                </VirtualizingStackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!-- _/RefTeleport -->
+    </Grid>
+</UserControl>

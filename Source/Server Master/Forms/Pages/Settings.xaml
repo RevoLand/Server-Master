@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="ServerMaster.Forms.Pages.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ServerMaster"
+             mc:Ignorable="d">
+    <Grid Background="White">
+        <GroupBox Header="Program Settings" Margin="5,5,5,391">
+            <Grid>
+                <!-- 1#1 -->
+                <Label Content="Client Directory" HorizontalAlignment="Left" Margin="10,10,0,132" Width="200" />
+                <TextBox x:Name="clientDirectory" MinHeight="30" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{local:SettingBinding clientDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="400" Margin="10,45,0,323" TextWrapping="Wrap" />
+                <Button x:Name="clientDegistir" Content="Change" HorizontalAlignment="Left" Margin="135,13,0,0" VerticalAlignment="Top" MinHeight="25" Width="75" Click="ClientDegistir_Click" />
+                <!-- 2#1 -->
+                <StackPanel Margin="5,85,0,0">
+                    <CheckBox Content="RefObjCommon (CharacterData, ItemData)" IsChecked="{local:SettingBinding Media_GenerateRefObjCommon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <CheckBox Content="Skill Info" IsChecked="{local:SettingBinding Media_GenerateRefSkill, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <CheckBox Content="NPC Info" IsChecked="{local:SettingBinding Media_GenerateNPC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <CheckBox Content="Teleport Info" IsChecked="{local:SettingBinding Media_GenerateTeleport, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <CheckBox Content="Others (HwanLevel etc)" IsChecked="{local:SettingBinding Media_GenerateOthers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" VerticalAlignment="Top" />
+                </StackPanel>
+                <UniformGrid HorizontalAlignment="Left" Margin="0,260,0,0" Columns="2">
+                    <Button Margin="0,0,5,0" Content="Generate PK2 Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="175" Height="30" Click="MediaPK2_Save_Click" />
+                    <Button Content="Open Output Directory" HorizontalAlignment="Left" VerticalAlignment="Top" Width="175" Height="30" Click="OutputDirectory_Button_Click" />
+                </UniformGrid>
+            </Grid>
+        </GroupBox>
+        <ListBox x:Name="programLogsBox" Margin="5,315,5,5" />
+    </Grid>
+</UserControl>

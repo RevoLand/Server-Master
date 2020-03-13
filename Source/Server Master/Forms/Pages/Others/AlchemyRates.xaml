@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="ServerMaster.Forms.Pages.Others.AlchemyRates"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid>
+        <!-- AlchemyItemList -->
+        <Grid HorizontalAlignment="Left" Width="340" MinHeight="700" Margin="0,3,0,0">
+            <GroupBox Margin="0,0,0,5" Header="List">
+                <Grid>
+                    <ListView x:Name="AlchemyItemList" Margin="0,5,0,35" SelectionMode="Single" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="True" SelectionChanged="AlchemyItemList_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Service}" Value="1" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#33008000" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Service}" Value="0" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#33FF0000" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid>
+                                        <TextBlock Text="{Binding CodeName128}" Padding="37,10,0,0" TextWrapping="Wrap" />
+                                        <Grid VerticalAlignment="Bottom" Margin="37,40,0,5">
+                                            <TextBlock TextWrapping="WrapWithOverflow" Margin="0,0,30,0" Text="{Binding MediaCodeName}" HorizontalAlignment="Left" />
+                                            <TextBlock Text="{Binding ID}" HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid Margin="0,0,0,5" Height="35" VerticalAlignment="Bottom">
+                        <Button Name="AlchemyItemList_RefreshButton" Content="Refresh" Height="25" Click="AlchemyItemList_RefreshButton_Click" />
+                    </Grid>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <!-- /AlchemyItemList -->
+
+        <Grid Name="AlchemyRate" HorizontalAlignment="Left" Width="800" MinHeight="700" Margin="350,15,0,0">
+            <VirtualizingStackPanel>
+                <UniformGrid Columns="3" Rows="1" HorizontalAlignment="Left">
+
+                    <UniformGrid Rows="4" Columns="1">
+                        <UniformGrid Columns="2">
+                            <Label Content="+1" Width="80" />
+                            <TextBox Name="Plus_01" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+2" />
+                            <TextBox Name="Plus_02" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+3" />
+                            <TextBox Name="Plus_03" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+4" />
+                            <TextBox Name="Plus_04" Text="0" />
+                        </UniformGrid>
+                    </UniformGrid>
+                    <UniformGrid Rows="4" Columns="1">
+                        <UniformGrid Columns="2">
+                            <Label Content="+5" />
+                            <TextBox Name="Plus_05" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+6" />
+                            <TextBox Name="Plus_06" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+7" />
+                            <TextBox Name="Plus_07" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+8" />
+                            <TextBox Name="Plus_08" Text="0" />
+                        </UniformGrid>
+                    </UniformGrid>
+                    <UniformGrid Rows="4" Columns="1">
+                        <UniformGrid Columns="2">
+                            <Label Content="+9" />
+                            <TextBox Name="Plus_09" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+10" />
+                            <TextBox Name="Plus_10" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+11" />
+                            <TextBox Name="Plus_11" Text="0" />
+                        </UniformGrid>
+                        <UniformGrid Columns="2">
+                            <Label Content="+12" />
+                            <TextBox Name="Plus_12" Text="0" />
+                        </UniformGrid>
+                    </UniformGrid>
+                </UniformGrid>
+                <UniformGrid Columns="2" Margin="0,10,0,0" HorizontalAlignment="Left">
+                    <TextBox Name="AlchemyParameters"></TextBox>
+                    <Button Name="SetAlchemyParameters" Height="40" Content="Yapıştır" Margin="50,0,0,0" Width="200" Click="SetAlchemyParameters_Click" />
+                </UniformGrid>
+                <UniformGrid Columns="2" Margin="0,10,0,0" HorizontalAlignment="Left">
+                    <Button Name="SaveAlchemyRate" Height="40" Content="Kaydet" Width="200" Click="SaveAlchemyRate_Click" />
+                    <Button Name="ResetAlcheymRate" Height="40" Content="Geri Al" Margin="50,0,0,0" Width="200" Click="ResetAlcheymRate_Click" />
+                </UniformGrid>
+            </VirtualizingStackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="ServerMaster.Forms.Pages.Others.MapViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="IngameMap" Margin="0,5,0,35">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="30" Columns="128" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <Border BorderBrush="AliceBlue" BorderThickness="0.1" Width="128" Height="128">
+                                <Grid>
+                                    <Image Source="{Binding MediaImage}" Width="128" Height="128" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <Image.ToolTip>
+                                            <ToolTip Background="LightBlue">
+                                                <TextBlock Width="200" TextWrapping="Wrap" Text="{Binding FileName}" />
+                                            </ToolTip>
+                                        </Image.ToolTip>
+                                        <Image.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="{Binding FileName}"></MenuItem>
+                                            </ContextMenu>
+                                        </Image.ContextMenu>
+                                    </Image>
+                                    <Canvas VerticalAlignment="Top" HorizontalAlignment="Left" Width="128" Height="128">
+                                        <ItemsControl ItemsSource="{Binding MapPoints}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <!--<Rectangle HorizontalAlignment="Left" VerticalAlignment="Bottom" Canvas.ZIndex="333333" Width="6" Height="6" Margin="{Binding Thickness}" Fill="blue" />-->
+                                                    <TextBlock Canvas.ZIndex="9" Background="GreenYellow" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="8px" Text="X" Margin="{Binding Thickness}">
+                                                        <TextBlock.ContextMenu>
+                                                            <ContextMenu>
+                                                                <MenuItem Header="{Binding DataContextTest}"></MenuItem>
+                                                            </ContextMenu>
+                                                        </TextBlock.ContextMenu>
+                                                    </TextBlock>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Canvas>
+                                </Grid>
+                            </Border>
+                            <TextBlock VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" FontWeight="SemiBold" FontSize="14" Text="{Binding RegionID}" Background="#4C000000" />
+                            <!--Margin="51,0,0,103"-->
+                            <TextBlock FontSize="8px" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0} x {1}">
+                                        <Binding Path="X" />
+                                        <Binding Path="Y" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <!--<Canvas VerticalAlignment="Top" HorizontalAlignment="Left" Width="32" Height="128" Background="Blue" />
+                            <Canvas VerticalAlignment="Top" HorizontalAlignment="Left" Width="32" Height="128" Background="BlueViolet" Margin="32,0,0,0" />
+                            <Canvas VerticalAlignment="Top" HorizontalAlignment="Left" Width="32" Height="128" Background="CadetBlue" Margin="64,0,0,0" />
+                            <Canvas VerticalAlignment="Top" HorizontalAlignment="Left" Width="32" Height="128" Background="CornflowerBlue" Margin="96,0,0,0" />-->
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

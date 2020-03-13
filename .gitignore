@@ -1,0 +1,12 @@
+Binaries/*.settings
+Binaries/*.config
+Binaries/*.dll
+Binaries/*.xml
+Binaries/*.pdb
+Binaries/*vshost*
+Binaries/Media/*
+Binaries/.slmcache/*
+*.suo
+Source/*.vs/
+Source/packages/*
+Source/Server Master/obj/*

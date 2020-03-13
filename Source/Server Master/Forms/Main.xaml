@@ -1,0 +1,138 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Pages="clr-namespace:ServerMaster.Forms.Pages"
+    xmlns:MainPages="clr-namespace:ServerMaster.Forms.Pages.Main"
+    xmlns:DropPages="clr-namespace:ServerMaster.Forms.Pages.Drops"
+    xmlns:OtherPages="clr-namespace:ServerMaster.Forms.Pages.Others"
+    xmlns:RefObjCommon="clr-namespace:ServerMaster.Forms.Pages.RefObjCommon"
+    x:Class="ServerMaster.Forms.Main"
+        mc:Ignorable="d"
+        Title="Server Master" Height="900" Width="1000" MinHeight="900" MinWidth="1000" Icon="/Server Master;component/Resources/server-master.png">
+    <Grid Margin="10">
+        <TabControl Margin="5">
+            <TabItem Header="_RefObjCommon">
+                <Grid Background="White">
+                    <TabControl Margin="5">
+                        <TabItem Header="Mobs and Pets">
+                            <RefObjCommon:MobsAndPets x:Name="RefObjCommon_MobsAndPets" />
+                        </TabItem>
+                        <TabItem Header="Item">
+                            <RefObjCommon:Item x:Name="RefObjCommon_Item" />
+                        </TabItem>
+                        <TabItem Header="Structure">
+                            <RefObjCommon:Structure x:Name="RefObjCommon_Structure" />
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="NPC">
+                <Pages:NPC x:Name="NPC" />
+            </TabItem>
+            <TabItem Header="Skill Data">
+                <MainPages:Skill x:Name="SkillData" />
+            </TabItem>
+            <TabItem Header="Drop Data">
+                <TabControl Margin="5">
+                    <TabItem Header="Monster_Drop">
+                        <DropPages:RefMonster_AssignedItemDrop x:Name="RefMonster_AssignedItemDrop"/>
+                    </TabItem>
+                    <TabItem Header="Monster_RndDrop">
+                        <DropPages:RefMonster_AssignedItemRndDrop x:Name="RefMonster_AssignedItemRndDrop"/>
+                    </TabItem>
+                    <TabItem Header="RefDropItem">
+                        <DropPages:RefDropItem x:Name="RefDropItem"/>
+                    </TabItem>
+                    <TabItem Header="Equip">
+                        <DropPages:RefDropClassSel_Equip x:Name="RefDropClassSel_Equip"/>
+                    </TabItem>
+                    <TabItem Header="Rare Equip">
+                        <DropPages:RefDropClassSel_RareEquip x:Name="RefDropClassSel_RareEquip"/>
+                    </TabItem>
+                    <TabItem Header="ATTR Stone">
+                        <DropPages:RefDropClassSel_Alchemy_ATTRStone x:Name="RefDropClassSel_Alchemy_ATTRStone"/>
+                    </TabItem>
+                    <TabItem Header="Magic Stone">
+                        <DropPages:RefDropClassSel_Alchemy_MagicStone x:Name="RefDropClassSel_Alchemy_MagicStone"/>
+                    </TabItem>
+                    <TabItem Header="Tablet">
+                        <DropPages:RefDropClassSel_Alchemy_Tablet x:Name="RefDropClassSel_Alchemy_Tablet"/>
+                    </TabItem>
+                    <TabItem Header="Ammo">
+                        <DropPages:RefDropClassSel_Ammo x:Name="RefDropClassSel_Ammo"/>
+                    </TabItem>
+                    <TabItem Header="Cure">
+                        <DropPages:RefDropClassSel_Cure x:Name="RefDropClassSel_Cure"/>
+                    </TabItem>
+                    <TabItem Header="Recover">
+                        <DropPages:RefDropClassSel_Recover x:Name="RefDropClassSel_Recover"/>
+                    </TabItem>
+                    <TabItem Header="Reinforce">
+                        <DropPages:RefDropClassSel_Reinforce x:Name="RefDropClassSel_Reinforce"/>
+                    </TabItem>
+                    <TabItem Header="Scroll">
+                        <DropPages:RefDropClassSel_Scroll x:Name="RefDropClassSel_Scroll"/>
+                    </TabItem>
+                    <TabItem Header="Gold">
+                        <DropPages:RefDropGold x:Name="RefDropGold"/>
+                    </TabItem>
+                    <TabItem Header="Drop Opt Level">
+                        <DropPages:RefDropOptLvlSel x:Name="RefDropOptLvlSel"/>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Media to DB">
+                <Pages:MediaToDB x:Name="MediaToDB" />
+            </TabItem>
+            <TabItem Header="Others">
+                <TabControl>
+                    <TabItem Header="Teleport">
+                        <TabControl Margin="5">
+                            <TabItem Header="Teleport Points">
+                                <OtherPages:RefTeleportPage x:Name="RefTeleportPage" />
+                            </TabItem>
+                        </TabControl>
+                    </TabItem>
+                    <TabItem Header="Media">
+                        <TabControl Margin="5">
+                            <TabItem Header="Media DDJ Viewer">
+                                <OtherPages:MediaDDJViewerPage x:Name="MediaDDJViewerPage" />
+                            </TabItem>
+                            <TabItem Header="DDJ to PNG Converter">
+                                <OtherPages:DDJConverter />
+                            </TabItem>
+                        </TabControl>
+                    </TabItem>
+                    <TabItem Header="Others">
+                        <TabControl Margin="5">
+                            <TabItem Header="Alchemy Rates">
+                                <OtherPages:AlchemyRates x:Name="AlchemyRatesPage" />
+                            </TabItem>
+                            <TabItem Header="Zerk Titles">
+                                <OtherPages:ZerkTitles x:Name="ZerkTitlesPage" />
+                            </TabItem>
+                            <TabItem Header="Pet Adder">
+                                <OtherPages:PetAdder x:Name="PetAdderPage" />
+                            </TabItem>
+                            <TabItem Header="In-game Map">
+                                <OtherPages:MapViewer x:Name="MapViewerPage" />
+                            </TabItem>
+                        </TabControl>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Form Generator">
+                <Grid>
+                    <TextBox Name="Generator_Input" MinWidth="450" MinHeight="800" MaxWidth="450" MaxHeight="800" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                    <Button Name="Generator_Convert" Content="Convert" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" Click="Generator_Convert_Click"></Button>
+                    <TextBox Name="Generator_Output" MinWidth="450" MinHeight="800" MaxWidth="450" MaxHeight="800" HorizontalAlignment="Right" VerticalAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings">
+                <Pages:Settings x:Name="Settings" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

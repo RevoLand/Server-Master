@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="ServerMaster.Forms.Pages.Drops.RefMonster_AssignedItemRndDrop"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid Background="White">
+        <!-- _RefDropItemGroup List -->
+        <Grid HorizontalAlignment="Left" Width="340" Margin="0,3,0,0">
+            <GroupBox Margin="0,0,0,5" Header="RefMonster_AssignedItemRndDrop__List">
+                <Grid>
+                    <ListView x:Name="Monster_AssignedRndDropList" Margin="0,5,0,45" SelectionMode="Single" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="True" SelectionChanged="RefDropItemGroup_List_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Add" Tag="Monster_AssignedDropList" Click="ContextMenuAdd_Click"></MenuItem>
+                                            <MenuItem Header="Remove" Tag="Monster_AssignedDropList" Click="ContextMenuRemove_Click"></MenuItem>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <Grid>
+                                        <TextBlock Text="{Binding RefMonsterCodeName}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                        <Grid VerticalAlignment="Bottom" Margin="0,30,0,5">
+                                            <TextBlock TextWrapping="WrapWithOverflow" Margin="0,0,30,0" Text="{Binding ItemGroupCodeName128}" HorizontalAlignment="Left" />
+                                            <TextBlock Text="{Binding ID}" HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <TextBox x:Name="SearchIn" VerticalAlignment="Bottom" Height="40" HorizontalAlignment="Left" Width="280"/>
+                    <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="40" Width="50" Content="ARA" Click="Button_Click"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <!-- /RefTeleport List -->
+
+        <!-- _RefTeleport -->
+        <Button Margin="360,10,292,0" Content="Save" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" Width="250" Click="RefDropItemGroup_Click" />
+        <ScrollViewer Margin="360,40,292,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left">
+            <GroupBox Name="Monster_AssignedRndDrop" Header="__RefMonster_AssignedItemDrop">
+                <VirtualizingStackPanel>
+                    <Label Content="Service:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Service}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="RefMonsterID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding RefMonsterID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="RefItemGroupID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding RefItemGroupID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ItemGroupCodeName128:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ItemGroupCodeName128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Overlap:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Overlap}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="DropAmountMin:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding DropAmountMin}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="DropAmountMax:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding DropAmountMax}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="DropRatio:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding DropRatio}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="param1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding param1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="param2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding param2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                </VirtualizingStackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!-- /_RefTeleport Edit -->
+
+        <!-- _RefTeleLink List -->
+        <Grid Margin="643,3,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="750" Width="340">
+            <GroupBox Margin="0" Header="RefDropItemAssign List">
+                <Grid>
+                    <ListView x:Name="Monster_AssignedRndDropList_SameMobs" Margin="0,5" SelectionMode="Single" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="True" SelectionChanged="RefDropItemAssign_List_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Add" Tag="Monster_AssignedDropList_SameMobs" Click="ContextMenuAdd_Click"></MenuItem>
+                                            <MenuItem Header="Remove" Tag="Monster_AssignedDropList_SameMobs" Click="ContextMenuRemove_Click"></MenuItem>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <Grid>
+                                        <TextBlock Text="{Binding RefMonsterCodeName}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                        <Grid VerticalAlignment="Bottom" Margin="0,30,0,5">
+                                            <TextBlock TextWrapping="WrapWithOverflow" Margin="0,0,30,0" Text="{Binding ItemGroupCodeName128}" HorizontalAlignment="Left" />
+                                            <TextBlock Text="{Binding ID}" HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add" Tag="DropItemAssign" Click="ContextMenuAdd_Click"></MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <!-- /_RefTeleLink List -->
+
+        <!-- _RefTeleport -->
+        <Button Margin="995,10,0,0" Content="Save" VerticalAlignment="Top" MinHeight="25" Click="RefDropItemAssign_Click" HorizontalAlignment="Left" Width="270" />
+        <ScrollViewer Margin="995,40,0,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="270">
+            <GroupBox Name="Monster_AssignedDrop_SameMobs" Header="__RefMonster_AssignedItemDrop">
+                <VirtualizingStackPanel>
+                    <Label Content="Service:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Service}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="RefMonsterID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding RefMonsterID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="RefItemGroupID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding RefItemGroupID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ItemGroupCodeName128:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ItemGroupCodeName128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Overlap:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Overlap}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="DropAmountMin:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding DropAmountMin}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="DropAmountMax:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding DropAmountMax}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="DropRatio:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding DropRatio}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="param1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding param1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="param2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding param2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                </VirtualizingStackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!-- _/RefTeleport -->
+    </Grid>
+</UserControl>

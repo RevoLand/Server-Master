@@ -1,0 +1,646 @@
+﻿<UserControl x:Class="ServerMaster.Forms.Pages.RefObjCommon.MobsAndPets"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:EnumsGenel="clr-namespace:ServerMaster.Definitions.Enums.Genel"
+             xmlns:EnumsRefObjChar="clr-namespace:ServerMaster.Definitions.Enums.RefObjChar"
+             xmlns:EnumsRefObjCommon="clr-namespace:ServerMaster.Definitions.Enums.RefObjCommon"
+             xmlns:Framework="clr-namespace:ServerMaster.Framework"
+             mc:Ignorable="d">
+    <Grid Background="White">
+        <Grid Margin="0,3,0,0" HorizontalAlignment="Left" Width="340">
+            <GroupBox Margin="0,0,0,5" Header="List">
+                <Grid>
+                    <ListView x:Name="refObjCommon_Mob" Margin="0,5,0,35" SelectionMode="Extended" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="False" SelectionChanged="RefObjCommon_Mob_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Service}" Value="1" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#33008000" />
+                                                </MultiDataTrigger>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Service}" Value="0" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#33FF0000" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Click="RefObjCommon_ContextMenu_Ekle_Click" Header="Add"></MenuItem>
+                                            <MenuItem Click="RefObjCommon_ContextMenu_Sil_Click" Header="Remove"></MenuItem>
+                                        </ContextMenu>
+                                    </Grid.ContextMenu>
+                                    <Grid>
+                                        <TextBlock Text="{Binding CodeName128}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                        <Grid VerticalAlignment="Bottom" Margin="0,30,0,5">
+                                            <TextBlock TextWrapping="Wrap" Margin="0,0,33,0" Text="{Binding MediaCodeName}" HorizontalAlignment="Left">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="{x:Type TextBlock}">
+                                                        <Style.Triggers>
+                                                            <MultiDataTrigger>
+                                                                <MultiDataTrigger.Conditions>
+                                                                    <Condition Binding="{Binding NameStrID128}" Value="xxx" />
+                                                                </MultiDataTrigger.Conditions>
+                                                                <Setter Property="Visibility" Value="Hidden" />
+                                                            </MultiDataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                            <TextBlock Text="{Binding ID}" HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid Margin="0,0,0,5" Height="35" VerticalAlignment="Bottom">
+                        <TextBox Height="25" x:Name="refobjCommon_Mob_Search" TextWrapping="WrapWithOverflow" TextChanged="RefobjCommon_Mob_Search_TextChanged" />
+                    </Grid>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <UniformGrid Columns="2" Rows="1" Margin="350,10,292,10" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Button Content="Save" MinHeight="30" MinWidth="133" Click="RefObjCommon_Mob_ObjCommon_Save_Click" />
+            <Button Content="Save All" Click="Button_SaveAll" />
+        </UniformGrid>
+        <ScrollViewer Margin="350,45,292,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" MinWidth="256">
+            <GroupBox Name="refObjCommon_Mob_ObjCommon" Header="_RefObjCommon">
+                <VirtualizingStackPanel>
+                    <UniformGrid Rows="2">
+                        <Label Content="Service:" VerticalAlignment="Top" />
+                        <ComboBox  VerticalAlignment="Top" SelectedItem="{Binding Service}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsGenel:Service}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ID:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CodeName128:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding CodeName128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" MaxWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ObjName128:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ObjName128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="OrgObjCodeName128:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding OrgObjCodeName128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="NameStrID128:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding NameStrID128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DescStrID128:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DescStrID128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CashItem:" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CashItem}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CashItem}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Bionic:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Bionic}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="TypeID1" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding TypeID1}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:TypeID1}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="TypeID2:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding TypeID2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="TypeID3:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding TypeID3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="TypeID4" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding TypeID4}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DecayTime" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DecayTime}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Country" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Country}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsGenel:Country}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Rarity" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Rarity}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:Rarity}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanTrade" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanTrade}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanTrade}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanSell" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanSell}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanSell}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanBuy" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanBuy}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanBuy}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanBorrow" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanBorrow}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanBorrow}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanDrop" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanDrop}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanDrop}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanPick" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanPick}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanPick}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanRepair" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanRepair}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanRepair}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanRevive" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanRevive}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanRevive}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanUse" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanUse}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanUse}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanThrow" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanThrow}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:CanThrow}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Price" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Price}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CostRepair" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding CostRepair}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CostRevive" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding CostRevive}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CostBorrow" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding CostBorrow}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="KeepingFee" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding KeepingFee}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="SellPrice" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding SellPrice}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ReqLevelType1" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding ReqLevelType1}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:ReqLevelType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ReqLevel1" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ReqLevel1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ReqLevelType2" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding ReqLevelType2}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:ReqLevelType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ReqLevel2" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ReqLevel2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ReqLevelType3" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding ReqLevelType3}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:ReqLevelType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ReqLevel3" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ReqLevel3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ReqLevelType4" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding ReqLevelType4}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjCommon:ReqLevelType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ReqLevel4" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ReqLevel4}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="MaxContain" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding MaxContain}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="RegionID" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding RegionID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Dir" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Dir}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="OffsetX" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding OffsetX}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="OffsetY" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding OffsetY}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="OffsetZ" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding OffsetZ}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Speed1" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Speed1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Speed2" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Speed2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="BCHeight" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding BCHeight}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="BCRadius" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding BCRadius}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="EventID" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding EventID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="AssocFileObj128" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding AssocFileObj128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="AssocFileDrop128" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding AssocFileDrop128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="AssocFileIcon128" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding AssocFileIcon128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="AssocFile1 128" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding AssocFile1_128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="AssocFile2 128" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding AssocFile2_128}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Link" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Link}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Button x:Name="refObjCommon_Mob_ObjCommon_Save" Content="Save" VerticalAlignment="Top" HorizontalAlignment="Center" MinHeight="25" MinWidth="256" Click="RefObjCommon_Mob_ObjCommon_Save_Click" />
+                    </UniformGrid>
+                </VirtualizingStackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <Button Margin="648,10,0,10" Content="Save" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" Click="RefObjCommon_Mob_ObjChar_Save_Click" Width="250" />
+        <ScrollViewer Margin="648,40,0,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left"  MinWidth="256">
+            <GroupBox Name="refObjCommon_Mob_ObjChar" Header="_RefObjChar">
+                <VirtualizingStackPanel>
+                    <UniformGrid Rows="2">
+                        <Label Content="ID:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Lvl:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Lvl}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CharGender" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CharGender}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsGenel:ReqGender}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="MaxHP:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding MaxHP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="MaxMP:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding MaxMP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistFrozen:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistFrozen}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistFrostbite:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistFrostbite}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistBurn:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistBurn}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistEShock:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistEShock}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistPoison:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistPoison}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistZombie:" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistZombie}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistSleep" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistSleep}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistRoot" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistRoot}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistSlow" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistSlow}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistFear" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistFear}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistMyopia" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistMyopia}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistBlood" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistBlood}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistStone" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistStone}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistDark" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistDark}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistStun" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistStun}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistDisea" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistDisea}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistChaos" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistChaos}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistCsePD" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistCsePD}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistCseMD" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistCseMD}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistCseSTR" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistCseSTR}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistCseINT" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistCseINT}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistCseHP" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistCseHP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistCseMP" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ResistCseMP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Resist24" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Resist24}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ResistBomb" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding ResistBomb}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Resist26" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Resist26}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Resist27" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Resist27}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Resist28" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Resist28}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Resist29" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Resist29}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Resist30" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Resist30}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Resist31" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Resist31}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Resist32" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding Resist32}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:Resist}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="InventorySize" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding InventorySize}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanStore_TID1" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanStore_TID1}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:CanStore_TID1_2}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanStore_TID2" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanStore_TID2}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:CanStore_TID1_2}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanStore_TID3" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanStore_TID3}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:CanStore_TID3}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanStore_TID4" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanStore_TID4}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:CanStore_TID4}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CanBeVehicle" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CanBeVehicle}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:CanBeVehicle}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DamagePortion (All 0)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DamagePortion}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="MaxPassenger" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding MaxPassenger}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="AssocTactics" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding AssocTactics}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="PD (Phy. Def)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding PD}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="MD (Mag. Def)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding MD}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="PAR (Phy. Absorb Rate)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding PAR}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="MAR (Mag. Absorb Rate)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding MAR}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ER (Parry Rate)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ER}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="BR (Block Rate)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding BR}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="HR (Hit Rate)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding HR}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CHR (Critical Hit Rate)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding CHR}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="ExpToGive" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding ExpToGive}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="CreepType" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding CreepType}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:CreepType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Knockdown (0, 1, 2, 3, 15)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Knockdown}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="KO_RecoverTime (0, 2000, 3000)" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding KO_RecoverTime}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 1" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 2" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 3" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 4" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_4}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 5" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_5}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 6" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_6}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 7" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_7}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 8" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_8}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 9" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_9}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="DefaultSkill 10" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding DefaultSkill_10}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="TextureType" VerticalAlignment="Top" />
+                        <ComboBox VerticalAlignment="Top" SelectedItem="{Binding TextureType}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsRefObjChar:TextureType}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 1" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 2" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 3" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 4" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_4}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 5" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_5}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 6" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_6}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 7" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_7}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 8" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_8}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 9" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_9}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Except 10" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Except_10}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Label Content="Link" VerticalAlignment="Top" />
+                        <TextBox Text="{Binding Link}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                    <UniformGrid Rows="2">
+                        <Button x:Name="refObjCommon_Mob_ObjChar_Save" Content="Save" VerticalAlignment="Top" HorizontalAlignment="Center" MinHeight="25" MinWidth="256" Click="RefObjCommon_Mob_ObjChar_Save_Click" />
+                    </UniformGrid>
+                </VirtualizingStackPanel>
+            </GroupBox>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

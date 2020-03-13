@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MethodTimer.Fody.2.3.0\build\MethodTimer.Fody.props" Condition="Exists('..\packages\MethodTimer.Fody.2.3.0\build\MethodTimer.Fody.props')" />
+  <Import Project="..\packages\Costura.Fody.3.3.1\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.3.3.1\build\Costura.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{22A83FB1-CF7C-47DB-89EE-FAB548B97F9B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServerMaster</RootNamespace>
+    <AssemblyName>Server Master</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Binaries\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ServerMaster.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\server-master.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AlphaFS, Version=2.2.0.0, Culture=neutral, PublicKeyToken=4d31a58f7d7ad5c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AlphaFS.2.2.6\lib\net452\AlphaFS.dll</HintPath>
+    </Reference>
+    <Reference Include="Costura, Version=3.3.1.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.3.3.1\lib\net40\Costura.dll</HintPath>
+    </Reference>
+    <Reference Include="DeepCloner, Version=0.10.0.0, Culture=neutral, PublicKeyToken=dc0b95cf99bf4e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeepCloner.0.10.2\lib\net40\DeepCloner.dll</HintPath>
+    </Reference>
+    <Reference Include="MethodTimer, Version=2.3.0.0, Culture=neutral, PublicKeyToken=cb1364609f40a1dc, processorArchitecture=MSIL">
+      <HintPath>..\packages\MethodTimer.Fody.2.3.0\lib\net452\MethodTimer.dll</HintPath>
+    </Reference>
+    <Reference Include="NPoco, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPoco.4.0.2\lib\net45\NPoco.dll</HintPath>
+    </Reference>
+    <Reference Include="Pfim, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Pfim.0.9.1\lib\netstandard2.0\Pfim.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.Core.1.0.0-beta0007\lib\netstandard2.0\SixLabors.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.ImageSharp.1.0.0-beta0006\lib\net472\SixLabors.ImageSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.RegularExpressions.4.3.1\lib\net463\System.Text.RegularExpressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Definitions\Enums\Genel.cs" />
+    <Compile Include="Definitions\Enums\RefObjChar.cs" />
+    <Compile Include="Definitions\Enums\RefObjCommon.cs" />
+    <Compile Include="Definitions\Enums\RefObjItem.cs" />
+    <Compile Include="Definitions\Enums\RefTeleLink.cs" />
+    <Compile Include="Definitions\Listenings.cs" />
+    <Compile Include="Definitions\MediaData.cs" />
+    <Compile Include="Definitions\TableData\Drops\Monster_AssignedItemDrop.cs" />
+    <Compile Include="Definitions\TableData\Drops\Monster_AssignedItemRndDrop.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropOptLvlSel.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropItemGroup.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropItemAssign.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropGold.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Scroll.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Reinforce.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Recover.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_RareEquip.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Equip.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Cure.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Ammo.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Alchemy_Tablet.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Alchemy_MagicStone.cs" />
+    <Compile Include="Definitions\TableData\Drops\RefDropClassSel_Alchemy_ATTRStone.cs" />
+    <Compile Include="Definitions\TableData\Main\RefObjChar.cs" />
+    <Compile Include="Definitions\TableData\Main\RefObjCommon.cs" />
+    <Compile Include="Definitions\TableData\Main\RefObjItem.cs" />
+    <Compile Include="Definitions\TableData\Main\RefObjStruct.cs" />
+    <Compile Include="Definitions\TableData\Main\RefSkill.cs" />
+    <Compile Include="Definitions\TableData\Media.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefMappingShopGroup.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefMappingShopWithTab.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefPackageItem.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefPricePolicyOfItem.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefScrapOfPackageItem.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefShop.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefShopGoods.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefShopGroup.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefShopItemGroup.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefShopTab.cs" />
+    <Compile Include="Definitions\TableData\NPC\RefShopTabGroup.cs" />
+    <Compile Include="Definitions\TableData\Teleport\RefTeleLink.cs" />
+    <Compile Include="Definitions\TableData\Teleport\RefTeleport.cs" />
+    <Compile Include="Definitions\TableData\Others.cs" />
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Alchemy_ATTRStone.xaml.cs">
+      <DependentUpon>RefDropClassSel_Alchemy_ATTRStone.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Alchemy_MagicStone.xaml.cs">
+      <DependentUpon>RefDropClassSel_Alchemy_MagicStone.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Alchemy_Tablet.xaml.cs">
+      <DependentUpon>RefDropClassSel_Alchemy_Tablet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Ammo.xaml.cs">
+      <DependentUpon>RefDropClassSel_Ammo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Cure.xaml.cs">
+      <DependentUpon>RefDropClassSel_Cure.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Equip.xaml.cs">
+      <DependentUpon>RefDropClassSel_Equip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_RareEquip.xaml.cs">
+      <DependentUpon>RefDropClassSel_RareEquip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Recover.xaml.cs">
+      <DependentUpon>RefDropClassSel_Recover.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Reinforce.xaml.cs">
+      <DependentUpon>RefDropClassSel_Reinforce.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropClassSel_Scroll.xaml.cs">
+      <DependentUpon>RefDropClassSel_Scroll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropGold.xaml.cs">
+      <DependentUpon>RefDropGold.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefMonster_AssignedItemRndDrop.xaml.cs">
+      <DependentUpon>RefMonster_AssignedItemRndDrop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefMonster_AssignedItemDrop.xaml.cs">
+      <DependentUpon>RefMonster_AssignedItemDrop.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropItem.xaml.cs">
+      <DependentUpon>RefDropItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Drops\RefDropOptLvlSel.xaml.cs">
+      <DependentUpon>RefDropOptLvlSel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Main\Skill.xaml.cs">
+      <DependentUpon>Skill.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\MediaToDB.xaml.cs">
+      <DependentUpon>MediaToDB.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\NPC.xaml.cs">
+      <DependentUpon>NPC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Others\AlchemyRates.xaml.cs">
+      <DependentUpon>AlchemyRates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Others\DDJConverter.xaml.cs">
+      <DependentUpon>DDJConverter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Others\MapViewer.xaml.cs">
+      <DependentUpon>MapViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Others\MediaDDJViewerPage.xaml.cs">
+      <DependentUpon>MediaDDJViewerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Others\PetAdder.xaml.cs">
+      <DependentUpon>PetAdder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Others\RefTeleportPage.xaml.cs">
+      <DependentUpon>RefTeleportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Others\ZerkTitles.xaml.cs">
+      <DependentUpon>ZerkTitles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Main\Item.xaml.cs">
+      <DependentUpon>Item.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Main\MobsAndPets.xaml.cs">
+      <DependentUpon>MobsAndPets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Main\Structure.xaml.cs">
+      <DependentUpon>Structure.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\SkillDecrypt.cs" />
+    <Compile Include="Framework\WPF\SettingBindingExtension.cs" />
+    <Compile Include="Functions\ExtensionMethods.cs" />
+    <Compile Include="Functions\Media\CharacterData.cs" />
+    <Compile Include="Functions\Media\DataParser.cs" />
+    <Compile Include="Functions\Media\Common.cs" />
+    <Compile Include="Functions\Media\Image.cs" />
+    <Compile Include="Functions\Media\ItemData.cs" />
+    <Compile Include="Functions\Media\NPCData.cs" />
+    <Compile Include="Functions\Media\Others.cs" />
+    <Compile Include="Functions\Media\SkillData.cs" />
+    <Compile Include="Functions\Media\StructureData.cs" />
+    <Compile Include="Functions\Media\TeleportData.cs" />
+    <Compile Include="Functions\Media\TextData.cs" />
+    <Compile Include="Functions\Program.cs" />
+    <Compile Include="Functions\NPC.cs" />
+    <Compile Include="Functions\Tables\Drop.cs" />
+    <Compile Include="Functions\Tables\Main.cs" />
+    <Compile Include="Functions\Tables\NPC.cs" />
+    <Compile Include="Functions\Tables\Other.cs" />
+    <Compile Include="Functions\Tables\Teleport.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Framework\Stats\WhiteStat.cs" />
+    <Page Include="Forms\Main.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Definitions\Directories.cs" />
+    <Compile Include="Forms\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Alchemy_ATTRStone.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Alchemy_MagicStone.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Alchemy_Tablet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Ammo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Cure.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Equip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_RareEquip.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Recover.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Reinforce.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropClassSel_Scroll.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropGold.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefMonster_AssignedItemRndDrop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefMonster_AssignedItemDrop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Drops\RefDropOptLvlSel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\Pages\Main\Skill.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\MediaToDB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\NPC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Others\AlchemyRates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Others\DDJConverter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Others\MapViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Others\MediaDDJViewerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Others\PetAdder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Others\RefTeleportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Others\ZerkTitles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Main\Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Main\MobsAndPets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Main\Structure.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\AsyncObservableCollection.cs" />
+    <Compile Include="Framework\WPF\EnumBindingSourceExtension.cs" />
+    <Compile Include="Framework\WPF\EnumDescriptionTypeConverter.cs" />
+    <Compile Include="Framework\PK2Reader\Reader.cs" />
+    <Compile Include="Framework\PortableSettingsProvider.cs" />
+    <Compile Include="Framework\SilkroadSecurityApi\Blowfish.cs" />
+    <Compile Include="Framework\SilkroadSecurityApi\Packet.cs" />
+    <Compile Include="Framework\SilkroadSecurityApi\PacketReader.cs" />
+    <Compile Include="Framework\SilkroadSecurityApi\PacketWriter.cs" />
+    <Compile Include="Framework\SilkroadSecurityApi\Security.cs" />
+    <Compile Include="Framework\SilkroadSecurityApi\TransferBuffer.cs" />
+    <Compile Include="Framework\SilkroadSecurityApi\Utility.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\server-master.ico" />
+    <Resource Include="Resources\server-master.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.3.3.1\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.3.3.1\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\MethodTimer.Fody.2.3.0\build\MethodTimer.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MethodTimer.Fody.2.3.0\build\MethodTimer.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.0.6\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.0.6\build\Fody.targets'))" />
+  </Target>
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Import Project="..\packages\Fody.6.0.6\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.6\build\Fody.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

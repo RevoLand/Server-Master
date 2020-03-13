@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="ServerMaster.Forms.Pages.Others.MediaDDJViewerPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <Grid>
+        <!-- MediaDDJList List -->
+        <Grid HorizontalAlignment="Left" Width="340" MinHeight="700" Margin="0,3,0,0">
+            <GroupBox Margin="0,0,0,5" Header="List">
+                <Grid>
+                    <ListView x:Name="MediaDDJList" Margin="0,5,0,35" SelectionMode="Single" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="True" SelectionChanged="MediaDDJList_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid>
+                                        <TextBlock Text="{Binding FileName}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Grid Margin="0,0,0,5" Height="35" VerticalAlignment="Bottom">
+                        <TextBox Name="MediaDDJList_Search" Height="25" TextWrapping="WrapWithOverflow" TextChanged="MediaDDJList_Search_TextChanged" />
+                    </Grid>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <!-- /MediaDDJList List -->
+
+        <Grid Name="DDJFile" HorizontalAlignment="Left" Width="800" MinHeight="700" Margin="350,15,0,0">
+            <VirtualizingStackPanel>
+                <UniformGrid HorizontalAlignment="Left" Rows="1" Columns="4">
+                    <Image Height="32" Width="32" Source="{Binding MediaImage}"></Image>
+                    <Image Height="64" Width="64" Source="{Binding MediaImage}"></Image>
+                    <Image Height="128" Width="128" Source="{Binding MediaImage}"></Image>
+                </UniformGrid>
+                <UniformGrid HorizontalAlignment="Left" Margin="0,10,0,0">
+                    <TextBox Height="40" Text="{Binding FullName}" HorizontalAlignment="Left" MinWidth="500" IsReadOnly="True"></TextBox>
+                </UniformGrid>
+                <UniformGrid HorizontalAlignment="Left" Margin="0,10,0,0">
+                    <Button Height="40" Content="Klasörde aç" Click="Button_Click" HorizontalAlignment="Left" MinWidth="400" />
+                </UniformGrid>
+            </VirtualizingStackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

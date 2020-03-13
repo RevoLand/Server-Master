@@ -1,0 +1,644 @@
+﻿<UserControl x:Class="ServerMaster.Forms.Pages.Main.Skill"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:EnumsGenel="clr-namespace:ServerMaster.Definitions.Enums.Genel"
+             xmlns:Framework="clr-namespace:ServerMaster.Framework"
+             mc:Ignorable="d">
+    <Grid Background="White" ShowGridLines="False" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Column="0" Grid.Row="0" Margin="0,5,0,0" Header="Skill List" HorizontalAlignment="Left" Width="340" VerticalAlignment="Top">
+            <Grid>
+                <ListView x:Name="RefSkillList" Margin="0,5,0,35" SelectionMode="Extended" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="False" SelectionChanged="SkillData_List_SelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <Grid.Style>
+                                    <Style TargetType="{x:Type Grid}">
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Service}" Value="1" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Background" Value="#33008000" />
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Service}" Value="0" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Background" Value="#33FF0000" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Add" Click="SkillList_Add"></MenuItem>
+                                        <MenuItem Header="Remove" Click="SkillList_Remove"></MenuItem>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
+                                <Grid>
+                                    <TextBlock Text="{Binding Basic_Code}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                    <Grid VerticalAlignment="Bottom" Margin="0,30,0,5">
+                                        <TextBlock TextWrapping="Wrap" Margin="0,0,33,0" Text="{Binding Media_SkillName}" HorizontalAlignment="Left">
+                                            <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Style.Triggers>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Media_SkillToolTip}" Value="xxx" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Visibility" Value="Hidden" />
+                                                        </MultiDataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding ID}" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Grid Margin="0,0,0,5" Height="35" VerticalAlignment="Bottom">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="73*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Height="25" x:Name="RefSkill_Search" TextWrapping="WrapWithOverflow" TextChanged="RefSkill_Search_TextChanged" Grid.ColumnSpan="2" Margin="0,5" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <UniformGrid Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,10,0,0">
+            <Button Content="Save" MinHeight="30" MinWidth="133" Click="SaveSkill" />
+            <Button Content="Save All" Click="SaveAllSkills" />
+        </UniformGrid>
+        <ScrollViewer Margin="0,40,0,0" Grid.Column="1" Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <GroupBox Name="SkillData_GroupBox" Header="__RefSkill" >
+                <VirtualizingStackPanel>
+                    <Label Content="Service:" VerticalAlignment="Top" />
+                    <ComboBox  VerticalAlignment="Top" SelectedItem="{Binding Service}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsGenel:Service}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="GroupID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding GroupID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Code:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Code}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Name:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Name}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Group:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Group}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Original:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Original}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Level:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Level}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Activity:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Activity}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__ChainCode:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_ChainCode}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__RecycleCost:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_RecycleCost}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__PreparingTime:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_PreparingTime}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__CastingTime:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_CastingTime}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__ActionDuration:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_ActionDuration}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__ReuseDelay:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_ReuseDelay}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__CoolTime:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_CoolTime}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__FlyingSpeed:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_FlyingSpeed}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__Interruptable:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_Interruptable}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__Overlap:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_Overlap}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__AutoAttackType:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_AutoAttackType}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__InTown:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_InTown}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__Range:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_Range}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Target__Required:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Target_Required}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetType__Animal:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetType_Animal}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetType__Land:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetType_Land}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetType__Building:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetType_Building}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Self:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Self}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Ally:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Ally}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Party:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Party}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Enemy__M:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Enemy_M}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Enemy__P:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Enemy_P}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Neutral:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Neutral}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__DontCare:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_DontCare}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetEtc__SelectDeadBody:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetEtc_SelectDeadBody}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__Mastery1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_Mastery1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__Mastery2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_Mastery2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__MasteryLevel1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_MasteryLevel1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__MasteryLevel2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_MasteryLevel2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__Str:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_Str}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__Int:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_Int}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__Skill1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_Skill1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__Skill2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_Skill2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__Skill3:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_Skill3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__SkillLevel1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_SkillLevel1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__SkillLevel2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_SkillLevel2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__SkillLevel3:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_SkillLevel3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__SP:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_SP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__Race:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_Race}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Req__Restriction1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Req_Restriction1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Req__Restriction2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Req_Restriction2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCast__Weapon1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCast_Weapon1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCast__Weapon2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCast_Weapon2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__HP:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_HP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__MP:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_MP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__HPRatio:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_HPRatio}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__MPRatio:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_MPRatio}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__WHAN:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_WHAN}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillTab:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillTab}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillPage:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillPage}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillColumn:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillColumn}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillRow:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillRow}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__IconFile:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_IconFile}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillName:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillName}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillToolTip:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillToolTip}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillToolTip__Desc:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillToolTip_Desc}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillStudy__Desc:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillStudy_Desc}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="AI__AttackChance:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding AI_AttackChance}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="AI__SkillType:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding AI_SkillType}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param3:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param4:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param4}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param5:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param5}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param6:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param6}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param7:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param7}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param8:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param8}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param9:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param9}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param10:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param10}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param11:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param11}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param12:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param12}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param13:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param13}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param14:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param14}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param15:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param15}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param16:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param16}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param17:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param17}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param18:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param18}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param19:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param19}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param20:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param20}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param21:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param21}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param22:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param22}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param23:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param23}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param24:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param24}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param25:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param25}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param26:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param26}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param27:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param27}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param28:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param28}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param29:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param29}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param30:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param30}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param31:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param31}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param32:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param32}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param33:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param33}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param34:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param34}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param35:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param35}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param36:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param36}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param37:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param37}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param38:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param38}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param39:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param39}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param40:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param40}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param41:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param41}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param42:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param42}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param43:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param43}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param44:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param44}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param45:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param45}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param46:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param46}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param47:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param47}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param48:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param48}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param49:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param49}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param50:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param50}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+
+
+                    <UniformGrid Rows="2">
+                        <Button Content="Save" Click="SaveSkill" VerticalAlignment="Top" HorizontalAlignment="Center" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                </VirtualizingStackPanel>
+            </GroupBox>
+        </ScrollViewer>
+        <!-- Skills by GroupID -->
+        <GroupBox Grid.Column="2" Grid.Row="0" Header="Skills by GroupID" HorizontalAlignment="Left" VerticalAlignment="Top" Width="340" Margin="0,5,0,0">
+            <Grid>
+                <ListView x:Name="RefSkillList_ByGroup" Margin="0,5,0,5" SelectionMode="Single" IsTabStop="False" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsSynchronizedWithCurrentItem="True" SelectionChanged="RefSkillList_ByGroup_SelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <Grid.Style>
+                                    <Style TargetType="{x:Type Grid}">
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Service}" Value="1" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Background" Value="#33008000" />
+                                            </MultiDataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Service}" Value="0" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Background" Value="#33FF0000" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Add" Click="SkillGroupList_Add"></MenuItem>
+                                        <MenuItem Header="Remove" Click="SkillGroupList_Remove"></MenuItem>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
+                                <Grid>
+                                    <TextBlock Text="{Binding Basic_Code}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                    <Grid VerticalAlignment="Bottom" Margin="0,30,0,5">
+                                        <TextBlock TextWrapping="Wrap" Margin="0,0,33,0" Text="{Binding Media_SkillName}" HorizontalAlignment="Left">
+                                            <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Style.Triggers>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Media_SkillToolTip}" Value="xxx" />
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="Visibility" Value="Hidden" />
+                                                        </MultiDataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding ID}" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </GroupBox>
+        <!-- /Skills by GroupID -->
+        <UniformGrid Grid.Column="3" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,10,0,0">
+            <Button Content="Save" MinHeight="30" MinWidth="133" Click="SaveSkillInGroup" />
+            <Button Content="Save All" Click="SaveAllSkillsInGroup" />
+        </UniformGrid>
+        <ScrollViewer Margin="0,40,0,0" Grid.Column="3" Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <GroupBox Name="SkillData_GroupIDBox" Header="__RefSkill">
+                <VirtualizingStackPanel>
+                    <Label Content="Service:" VerticalAlignment="Top" />
+                    <ComboBox  VerticalAlignment="Top" SelectedItem="{Binding Service}" ItemsSource="{Framework:EnumBindingSource {x:Type EnumsGenel:Service}}" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="GroupID:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding GroupID}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Code:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Code}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Name:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Name}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Group:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Group}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Original:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Original}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Level:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Level}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__Activity:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_Activity}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__ChainCode:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_ChainCode}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Basic__RecycleCost:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Basic_RecycleCost}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__PreparingTime:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_PreparingTime}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__CastingTime:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_CastingTime}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__ActionDuration:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_ActionDuration}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__ReuseDelay:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_ReuseDelay}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__CoolTime:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_CoolTime}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__FlyingSpeed:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_FlyingSpeed}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__Interruptable:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_Interruptable}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__Overlap:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_Overlap}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__AutoAttackType:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_AutoAttackType}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__InTown:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_InTown}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Action__Range:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Action_Range}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Target__Required:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Target_Required}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetType__Animal:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetType_Animal}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetType__Land:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetType_Land}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetType__Building:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetType_Building}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Self:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Self}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Ally:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Ally}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Party:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Party}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Enemy__M:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Enemy_M}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Enemy__P:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Enemy_P}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__Neutral:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_Neutral}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetGroup__DontCare:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetGroup_DontCare}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="TargetEtc__SelectDeadBody:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding TargetEtc_SelectDeadBody}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__Mastery1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_Mastery1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__Mastery2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_Mastery2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__MasteryLevel1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_MasteryLevel1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__MasteryLevel2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_MasteryLevel2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__Str:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_Str}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCommon__Int:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCommon_Int}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__Skill1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_Skill1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__Skill2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_Skill2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__Skill3:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_Skill3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__SkillLevel1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_SkillLevel1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__SkillLevel2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_SkillLevel2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__SkillLevel3:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_SkillLevel3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__SP:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_SP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqLearn__Race:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqLearn_Race}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Req__Restriction1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Req_Restriction1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Req__Restriction2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Req_Restriction2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCast__Weapon1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCast_Weapon1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="ReqCast__Weapon2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding ReqCast_Weapon2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__HP:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_HP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__MP:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_MP}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__HPRatio:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_HPRatio}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__MPRatio:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_MPRatio}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Consume__WHAN:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Consume_WHAN}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillTab:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillTab}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillPage:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillPage}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillColumn:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillColumn}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillRow:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillRow}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__IconFile:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_IconFile}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillName:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillName}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillToolTip:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillToolTip}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillToolTip__Desc:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillToolTip_Desc}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="UI__SkillStudy__Desc:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding UI_SkillStudy_Desc}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="AI__AttackChance:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding AI_AttackChance}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="AI__SkillType:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding AI_SkillType}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param1:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param1}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param2:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param2}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param3:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param3}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param4:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param4}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param5:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param5}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param6:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param6}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param7:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param7}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param8:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param8}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param9:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param9}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param10:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param10}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param11:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param11}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param12:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param12}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param13:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param13}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param14:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param14}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param15:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param15}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param16:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param16}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param17:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param17}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param18:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param18}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param19:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param19}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param20:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param20}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param21:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param21}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param22:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param22}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param23:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param23}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param24:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param24}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param25:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param25}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param26:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param26}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param27:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param27}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param28:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param28}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param29:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param29}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param30:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param30}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param31:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param31}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param32:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param32}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param33:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param33}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param34:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param34}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param35:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param35}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param36:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param36}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param37:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param37}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param38:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param38}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param39:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param39}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param40:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param40}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param41:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param41}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param42:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param42}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param43:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param43}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param44:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param44}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param45:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param45}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param46:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param46}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param47:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param47}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param48:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param48}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param49:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param49}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+                    <Label Content="Param50:" VerticalAlignment="Top" />
+                    <TextBox Text="{Binding Param50}" VerticalAlignment="Top" HorizontalAlignment="Left" MinHeight="25" MinWidth="256" />
+
+
+                    <UniformGrid Rows="2">
+                        <Button Content="Save" Click="SaveSkillInGroup" VerticalAlignment="Top" HorizontalAlignment="Center" MinHeight="25" MinWidth="256" />
+                    </UniformGrid>
+                </VirtualizingStackPanel>
+            </GroupBox>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
