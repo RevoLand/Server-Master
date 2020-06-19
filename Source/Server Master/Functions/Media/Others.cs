@@ -24,7 +24,7 @@ namespace ServerMaster.Functions.Media
                 {
                     foreach (var hwanLevel in Definitions.Listenings.Other.HWANLevels.ToList())
                     {
-                        FileStream.WriteLine($"{hwanLevel.HwanLevel}\t{hwanLevel.ParamFourcc1}\t{hwanLevel.ParamValue1}\t{hwanLevel.ParamFourcc2}\t{hwanLevel.ParamValue2}\t{hwanLevel.ParamFourcc3}\t{hwanLevel.ParamValue3}\t{hwanLevel.ParamFourcc4}\t{hwanLevel.ParamValue4}\t{hwanLevel.ParamFourcc5}\t{hwanLevel.ParamValue5}\t{hwanLevel.AssocFileObj128}\t{hwanLevel.Title_CH70}\t{hwanLevel.Title_EU70}");
+                        FileStream.WriteLine($"{hwanLevel.HwanLevel}\t{hwanLevel.Title_CH70}\t{hwanLevel.Title_EU70}");
                     }
                 }
 
